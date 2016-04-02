@@ -19,13 +19,14 @@ namespace OWINTest
 
         public async override Task Invoke(IOwinContext context)
         {
+            Console.WriteLine($"in the teapot ! my sdata is {context.Request.GetSData()}");
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, "Scott"));
             claims.Add(new Claim(ClaimTypes.Email, "scott@scottbrady91.com"));
 
             var id = new ClaimsIdentity(claims, "cookie");
             context.Authentication.SignIn(id);
-
+            
 
             context.Response.StatusCode = 418;
             context.Response.ContentType = "image/jpeg";
@@ -38,8 +39,11 @@ namespace OWINTest
             catch(Exception exception)
             {
                 context.Response.ContentType = "text/html";
-                context.Response.Write("<h2>ouch something bad happened : " + exception.Message+"</h2><p>"+exception.StackTrace.Replace("\n","<br>")+"</p>");
-                
+                context.Response.Write("<h2>ouch something bad happened : " + exception.Message+"</h2><p>"+exception.StackTrace.Replace("\n","<br>")+"</p>");                
+            }
+            if (Next != null)
+            {
+                await Next.Invoke(context);
             }
             
         }

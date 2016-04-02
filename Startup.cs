@@ -14,6 +14,7 @@ namespace OWINTest
         {
 
             app.UseFileServer();
+            app.UseLoggingMiddleware(new LoggingOptions { Tag = "HALO ! "});
             app.UseTeapotMiddleware(new TeapotOptions { Biscuit = "Hobnob" });
             
             

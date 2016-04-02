@@ -89,7 +89,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestExtender.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="LoggingMiddleware.cs" />
     <Compile Include="TeapotMiddleware.cs" />
   </ItemGroup>
   <ItemGroup>
